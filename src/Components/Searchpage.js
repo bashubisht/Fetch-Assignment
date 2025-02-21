@@ -125,10 +125,14 @@ const SearchPage = () => {
 
     return (
         <div className="search-page">
-            <NavBar title="🔍 Dog Search" favoriteDogList={favoriteDogList} />
+            <NavBar title="🐕 Dog Search" favoriteDogList={favoriteDogList} />
             
             <div className="search-panel">
-                <h2>Search Filters</h2>
+                <h2>Search Filters  <button  onClick={resetFilters} className="reset-button">
+                        Reset Filters
+                    </button></h2>
+
+
                 <div className="search-controls">
                     <div className="filter-group">
                         <label>Breed:</label>
@@ -200,7 +204,8 @@ const SearchPage = () => {
                             ) : (
                                 <FaSortAmountDown className="sort-icon" />
                             )}
-                        </icon>
+                        </icon> 
+                        
                         </label>
                           
                         <select 
@@ -212,20 +217,14 @@ const SearchPage = () => {
                             }}
                             className="sort-select"
                         >
-                            {/* <option value="asc">A-Z</option>
-                            <option value="desc">Z-A</option> */}
-                            <option >Breed</option>
-                            <option >Name</option>
-                            <option >Age</option>
+                            <option>Breed</option>
+                            <option>Name</option>
+                            <option>Age</option>
                             
-                        </select>
-                        
+                            
+                        </select>   
                         
                     </div>
-
-                    <button onClick={resetFilters} className="reset-button">
-                        Reset Filters
-                    </button>
                 </div>
             </div>
 

@@ -4,15 +4,11 @@ import {useNavigate} from "react-router-dom";
 const LoginPage = ()=>{
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  //const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
-  
 
   const handleSubmit=(e)=>{
     e.preventDefault(); 
-    //setIsPending(true);
     
-
     fetch("https://frontend-take-home-service.fetch.com/auth/login",{
       method: "POST",
       headers: { "Content-Type" : "application/json"},
@@ -23,15 +19,11 @@ const LoginPage = ()=>{
     })
     
     }).then(response =>{
-     // setIsPending(false);
-      // console.log("done");
-      console.log(response)
       navigate('/search');
 
 
     })
   }
-
 
     return(
         <div className="login-container">
@@ -62,8 +54,7 @@ const LoginPage = ()=>{
         <button > Submit</button>
         </form>
         </div>
-        <p>{name}</p>
-        <p>{email}</p>
+      
         </div>
     );
 }

@@ -2,32 +2,24 @@ import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import NavBar from './NavBar';
 import DogTile from './DogTile';
-//import { Navigate } from 'react-router-dom';
-
-
+import './Favorites.css';
 
 const Favorites = ({onFavoriteToggle}) => {
-   // const navigate = useNavigate();
     const location = useLocation();
-   // const favoriteDogList = location.state?.favoriteDogList || [];
     const [error, setError] = useState(null);
     const [matchedDog, setMatchedDog] = useState(null);
     const [showMatchModal, setShowMatchModal] = useState(false);
     const [isGeneratingMatch, setIsGeneratingMatch] = useState(false);
     const [favoriteDogList, setFavoriteDogList] = useState(location.state?.favoriteDogList || []);
 
-      // Add this new handler to update local state
-      const handleFavoriteToggle = (dog, isFavorite) => {
+ 
+    const handleFavoriteToggle = (dog, isFavorite) => {
         if (!isFavorite) {
-            // Remove from favorites
             setFavoriteDogList(prev => prev.filter(d => d.id !== dog.id));
         }
-        // Propagate the change up if needed
         if (onFavoriteToggle) onFavoriteToggle(dog, isFavorite);
     };
 
-
-    
     const findMatch = async () => {
         if (favoriteDogList.length === 0) {
             setError('Please add some dogs to your favorites first!');
@@ -38,7 +30,6 @@ const Favorites = ({onFavoriteToggle}) => {
         setError(null);
 
         try {
-            // Step 1: Get a match from favorite dogs
             const matchResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs/match', {
                 method: 'POST',
                 headers: {
@@ -47,15 +38,12 @@ const Favorites = ({onFavoriteToggle}) => {
                 credentials: 'include',
                 body: JSON.stringify(favoriteDogList.map(dog => dog.id))
             });
-
             if (!matchResponse.ok) {
                 throw new Error('Failed to generate match');
             }
 
             const { match } = await matchResponse.json();
-            console.log('Match ID received:', match);
-
-            // Step 2: Get the matched dog's details
+            console.log('Match ID received:', match)
             const dogResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
                 method: 'POST',
                 headers: {
@@ -83,57 +71,11 @@ const Favorites = ({onFavoriteToggle}) => {
     };
 
     return (
-        // <div className="favorites-page">
-        //    <NavBar 
-        //         title="❤️ My Favorite Dogs"
-        //         favoriteDogList={favoriteDogList}
-        //     />
-           
-            
-        //     <div className="favorites-grid">
-        //         {favoriteDogList.length > 0 ? (
-        //             favoriteDogList.map((dog, index) => (
-        //                 <div key={index} className="favorite-dog-card">
-        //                     <img 
-        //                         src={dog.img} 
-        //                         alt={dog.name} 
-        //                         className="fav-dog-image"
-        //                     />
-        //                     <div className="fav-dog-info">
-        //                         <h2>{dog.name}</h2>
-        //                         <p>Breed: {dog.breed}</p>
-        //                         <p>Age: {dog.age}</p>
-        //                         <p>Location: {dog.zip_code}</p>
-        //                     </div>
-        //                 </div>
-        //             ))
-        //         ) : (
-        //             <p>No favorite dogs selected yet!</p>
-        //         )}
-        //     </div>
-        //     <div>
-        //         <button onClick={findMatch}> Find Match</button>
-        //     </div>
-        // </div>
         <div className="favorites-container">
                <NavBar 
                title="❤️ My Favorite Dogs"
              favoriteDogList={favoriteDogList}
            />
-            <div className="favorites-header">
-               
-                <div className="favorites-actions">
-                    {/* <button className="back-to-search" onClick={() => navigate('/search')}>
-                        Back to Search
-                    </button> */}
-                    <div className="right-actions">
-                        {/* <span className="favorites-count">
-                            {favoriteDogList.length} {favoriteDogList.length === 1 ? 'Dog' : 'Dogs'} in Favorites
-                        </span> */}
-                       
-                    </div>
-                </div>
-            </div>
 
             {error && (
                 <div className="error-message">
@@ -152,13 +94,15 @@ const Favorites = ({onFavoriteToggle}) => {
                     />
                 ))}
             </div>
+            
             <button 
-                            className={`find-match-button ${isGeneratingMatch ? 'loading' : ''}`}
-                            onClick={findMatch}
-                            disabled={favoriteDogList.length === 0 || isGeneratingMatch}
-                        >
-                            {isGeneratingMatch ? 'Finding Your Match...' : 'Find My Match!'}
-                        </button>
+                 className={`find-match-button ${isGeneratingMatch ? 'loading' : ''}`}
+                 onClick={findMatch}
+                disabled={favoriteDogList.length === 0 || isGeneratingMatch}
+             >
+                {isGeneratingMatch ? 'Finding Your Match...' : 'Find My Match!'}
+            </button>
+           
 
             {showMatchModal && matchedDog && (
                 <div className="match-modal-overlay" onClick={() => setShowMatchModal(false)}>

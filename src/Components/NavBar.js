@@ -1,6 +1,5 @@
-
 import { useNavigate } from 'react-router-dom';
-
+import "./Navbar.css";
 
 const NavBar = ( props ) => {
     const navigate = useNavigate();
@@ -19,7 +18,6 @@ const NavBar = ( props ) => {
         })
         .catch(error => {
             console.error('Error during logout:', error);
-            // Optionally, show an error message to the user
         });
     };
 

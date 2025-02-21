@@ -52,7 +52,7 @@ input {
 button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #007bff;
+  background-color: #f1575c;
   color: white;
   border: none;
   border-radius: 4px;
@@ -62,7 +62,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #d83232;
 }
 
 /* dog tile ui */
@@ -109,21 +109,6 @@ button:hover {
   color: #666;
 }
 
-.favorite-button {
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 8px;
-  align-self: flex-start;
-  transition: background-color 0.2s;
-}
-
-.favorite-button:hover {
-  background-color: #ff5252;
-}
 
 .dog-description {
   color: #666;
@@ -212,10 +197,32 @@ button:hover {
 }
 
 .nav-button.logout {
-  background-color: #ff4444;
+  background-color:#007bff;
   color: white;
 }
 
 .nav-button.logout:hover {
-  background-color: #ff2222;
+  background-color: #035cbc;
 } 
+
+
+.find-match-button {
+  place-items: center; 
+  justify-content: center;
+  background-color: #007bff;
+  width: 400px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;  
+  transition: background-color 0.3s ease;
+}
+
+.find-match-button:hover {
+  background-color: #0056b3;
+}
+

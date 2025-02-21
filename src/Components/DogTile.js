@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+
 
 
 const DogTile = (props) => {
-    // const [isFavorite, setIsFavorite] = useState(false);
     const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 
     useEffect(() => {
@@ -32,8 +31,6 @@ const DogTile = (props) => {
                 </div>
                 <button 
                     onClick={handleFavoriteClick}
-                    // className={`favorite-button ${isFavorite ? 'favorited' : ''}`}
-                   
                 >
                     {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
                 </button>
