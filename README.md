@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Fetch Dog Adoption App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based frontend application designed to help users find shelter dogs for adoption. Users can search, filter, sort, favorite, and match with dogs using Fetch's provided backend API.
 
-## Available Scripts
+Live Demo
 
-In the project directory, you can run:
+Deployed Site: https://fetch-assignment-sandy.vercel.app/
 
-### `npm start`
+Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+GitHub Repository: [Your Repository URL]
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Features
 
-### `npm test`
+User Authentication:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Simple login screen where users enter their name and email.
 
-### `npm run build`
+Authentication via Fetch's login endpoint.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Dog Search Page:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Filter dogs by breed, age range, and ZIP code.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Results are paginated, showing 25 dogs per page.
 
-### `npm run eject`
+Sort results by breed, name, or age.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Sorting can be toggled between ascending and descending order.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The default sorting order is alphabetically by breed in ascending order.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Displays dog name, age, breed, location (ZIP code), and image.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Ability to reset all filters.
 
-## Learn More
+Favorite & Match Dogs:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Users can favorite or unfavorite dogs from search results.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+A separate favorites page lists all favorited dogs.
 
-### Code Splitting
+Generate a match from favorite dogs using the /dogs/match endpoint.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Matched dog is displayed in a modal with detailed information.
 
-### Analyzing the Bundle Size
+Navigation:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Navigation bar with links to Home (search page), Favorites page, and Logout.
 
-### Making a Progressive Web App
+Logout functionality clears session and favorites.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Responsive Design:
 
-### Advanced Configuration
+Responsive UI ensuring usability across different device sizes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Technologies Used
 
-### Deployment
+React.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+React Router for navigation
 
-### `npm run build` fails to minify
+Axios for HTTP requests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+CSS for styling
+
+React Icons
+
+Git for version control
+
+Installation
+
+Prerequisites
+
+Node.js (v14 or later recommended)
+
+npm (Node package manager)
+
+Setup
+
+Clone the repository:
+
+git clone [Your Repository URL]
+
+Navigate to the project directory:
+
+cd [Your Project Directory]
+
+Install dependencies:
+
+npm install
+
+Running the Application Locally
+
+Start the application:
+
+npm start
+
+The app will be accessible at:
+
+http://localhost:3000
+
+Usage
+
+Login with your name and email to access the application.
+
+Search dogs using filters for breed, age, and ZIP code.
+
+Sort results by breed, name, or age in ascending or descending order.
+
+Favorite dogs by clicking the "Add to Favorites" button.
+
+Visit the Favorites page to view favorited dogs.
+
+Click "Find My Match!" to generate a match from favorite dogs.

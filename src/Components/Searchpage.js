@@ -7,25 +7,72 @@ import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 const SearchPage = () => {
     const [dogs, setDogs] = useState([]);
     const [breeds, setBreeds] = useState([]);
-    const [selectedBreed, setSelectedBreed] = useState('');
-    const [sortOrder, setSortOrder] = useState('asc');
-
+    const [selectedBreed, setSelectedBreed] = useState(() => {
+        return localStorage.getItem('selectedBreed') || '';
+    });
+    const [sortOrder, setSortOrder] = useState(() => {
+        return localStorage.getItem('sortOrder') || 'asc';
+    });
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const [favoriteDogList, setFavoriteDogList] = useState([]);
-    const [ageMin, setAgeMin] = useState('');
-    const [ageMax, setAgeMax] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [favoriteDogList, setFavoriteDogList] = useState(() => {
+        const savedFavorites = localStorage.getItem('favoriteDogs');
+        return savedFavorites ? JSON.parse(savedFavorites) : [];
+    });
+    const [ageMin, setAgeMin] = useState(() => {
+        return localStorage.getItem('ageMin') || '';
+    });
+    const [ageMax, setAgeMax] = useState(() => {
+        return localStorage.getItem('ageMax') || '';
+    });
+    const [zipCode, setZipCode] = useState(() => {
+        return localStorage.getItem('zipCode') || '';
+    });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const pageSize = 25;
 
-    const [sortTerm, setSortTerm] = useState("breed");
+    const [sortTerm, setSortTerm] = useState(() => {
+        return localStorage.getItem('sortTerm') || 'breed';
+    });
+
+    useEffect(() => {
+        // Check if this is a new login session
+        const isNewSession = !localStorage.getItem('sessionActive');
+        
+        if (isNewSession) {
+            // Clear all stored filters and favorites
+            localStorage.removeItem('favoriteDogs');
+            localStorage.removeItem('selectedBreed');
+            localStorage.removeItem('ageMin');
+            localStorage.removeItem('ageMax');
+            localStorage.removeItem('zipCode');
+            localStorage.removeItem('sortOrder');
+            localStorage.removeItem('sortTerm');
+            
+            // Reset all states to default
+            setFavoriteDogList([]);
+            setSelectedBreed('');
+            setAgeMin('');
+            setAgeMax('');
+            setZipCode('');
+            setSortOrder('asc');
+            setSortTerm('breed');
+            
+            // Mark session as active
+            localStorage.setItem('sessionActive', 'true');
+        }
+    }, []); // Empty dependency array means this runs once when component mounts
 
     useEffect(() => {
         fetchBreeds();
         fetchDogs();
     }, [currentPage, selectedBreed, sortOrder, ageMin, ageMax, zipCode, sortTerm]);
+
+    useEffect(() => {
+        // Update localStorage whenever favoriteDogList changes
+        localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogList));
+    }, [favoriteDogList]);
 
     const fetchBreeds = async () => {
         try {
@@ -108,10 +155,51 @@ const SearchPage = () => {
 
     const handleFavoriteToggle = (dog, isFavorite) => {
         if (isFavorite) {
-            setFavoriteDogList([...favoriteDogList, dog]);
+            setFavoriteDogList(prev => [...prev, dog]);
         } else {
-            setFavoriteDogList(favoriteDogList.filter(d => d.id !== dog.id));
+            setFavoriteDogList(prev => prev.filter(d => d.id !== dog.id));
         }
+    };
+
+    const handleBreedChange = (e) => {
+        const value = e.target.value;
+        setSelectedBreed(value);
+        localStorage.setItem('selectedBreed', value);
+        setCurrentPage(1);
+    };
+
+    const handleSortOrderChange = () => {
+        const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        setSortOrder(newOrder);
+        localStorage.setItem('sortOrder', newOrder);
+    };
+
+    const handleAgeMinChange = (e) => {
+        const value = e.target.value;
+        setAgeMin(value);
+        localStorage.setItem('ageMin', value);
+        setCurrentPage(1);
+    };
+
+    const handleAgeMaxChange = (e) => {
+        const value = e.target.value;
+        setAgeMax(value);
+        localStorage.setItem('ageMax', value);
+        setCurrentPage(1);
+    };
+
+    const handleZipCodeChange = (e) => {
+        const value = e.target.value;
+        setZipCode(value);
+        localStorage.setItem('zipCode', value);
+        setCurrentPage(1);
+    };
+
+    const handleSortTermChange = (e) => {
+        const value = e.target.value;
+        setSortTerm(value);
+        localStorage.setItem('sortTerm', value);
+        setCurrentPage(1);
     };
 
     const resetFilters = () => {
@@ -120,7 +208,14 @@ const SearchPage = () => {
         setAgeMax('');
         setZipCode('');
         setSortOrder('asc');
+        setSortTerm('breed');
         setCurrentPage(1);
+        localStorage.removeItem('selectedBreed');
+        localStorage.removeItem('ageMin');
+        localStorage.removeItem('ageMax');
+        localStorage.removeItem('zipCode');
+        localStorage.removeItem('sortOrder');
+        localStorage.removeItem('sortTerm');
     };
 
     return (
@@ -138,10 +233,7 @@ const SearchPage = () => {
                         <label>Breed:</label>
                         <select 
                             value={selectedBreed}
-                            onChange={(e) => {
-                                setSelectedBreed(e.target.value);
-                                setCurrentPage(1);
-                            }}
+                            onChange={handleBreedChange}
                             className="breed-select"
                         >
                             <option value="">All Breeds</option>
@@ -158,10 +250,7 @@ const SearchPage = () => {
                                 type="number"
                                 placeholder="Min Age"
                                 value={ageMin}
-                                onChange={(e) => {
-                                    setAgeMin(e.target.value);
-                                    setCurrentPage(1);
-                                }}
+                                onChange={handleAgeMinChange}
                                 min="0"
                             />
                             <span>to</span>
@@ -169,10 +258,7 @@ const SearchPage = () => {
                                 type="number"
                                 placeholder="Max Age"
                                 value={ageMax}
-                                onChange={(e) => {
-                                    setAgeMax(e.target.value);
-                                    setCurrentPage(1);
-                                }}
+                                onChange={handleAgeMaxChange}
                                 min={ageMin || "0"}
                             />
                         </div>
@@ -184,10 +270,7 @@ const SearchPage = () => {
                             type="text"
                             placeholder="ZIP Code"
                             value={zipCode}
-                            onChange={(e) => {
-                                setZipCode(e.target.value);
-                                setCurrentPage(1);
-                            }}
+                            onChange={handleZipCodeChange}
                         />
                     </div>
 
@@ -195,7 +278,7 @@ const SearchPage = () => {
                         <label>Sort By
                         <icon
                             
-                            onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+                            onClick={handleSortOrderChange}
                             aria-label={`Sort ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
                             
                         >
@@ -210,11 +293,7 @@ const SearchPage = () => {
                           
                         <select 
                             value={sortTerm}
-                            onChange={(e) => {
-                                console.log("e.target.value=====> ", e.target.value)
-                                setSortTerm(e.target.value);
-                                setCurrentPage(1);
-                            }}
+                            onChange={handleSortTermChange}
                             className="sort-select"
                         >
                             <option>Breed</option>

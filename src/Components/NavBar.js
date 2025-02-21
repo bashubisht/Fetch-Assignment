@@ -4,6 +4,11 @@ import "./Navbar.css";
 const NavBar = ( props ) => {
     const navigate = useNavigate();
 
+    const getFavoriteCount = () => {
+        const savedFavorites = localStorage.getItem('favoriteDogs');
+        return savedFavorites ? JSON.parse(savedFavorites).length : 0;
+    };
+
     const handleLogout = () => {
         fetch("https://frontend-take-home-service.fetch.com/auth/logout", {
             method: "POST",
@@ -15,6 +20,8 @@ const NavBar = ( props ) => {
                 throw new Error('Logout failed');
             }
             navigate('/');
+            localStorage.removeItem('sessionActive');
+            localStorage.removeItem('favoriteDogs'); // Clear favorites on logout
         })
         .catch(error => {
             console.error('Error during logout:', error);
@@ -24,8 +31,11 @@ const NavBar = ( props ) => {
     const goToHome = () => {
         navigate('/search');
     };
+    
     const goToFavorites = () => {
-        navigate('/favorites', { state: { favoriteDogList: props.favoriteDogList } });
+        const savedFavorites = localStorage.getItem('favoriteDogs');
+        const favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
+        navigate('/favorites', { state: { favoriteDogList: favorites } });
     };
 
     return (
@@ -38,7 +48,8 @@ const NavBar = ( props ) => {
                     🏠 Home
                 </button>
                 <button onClick={goToFavorites} className="nav-button">
-                    ❤️ Favorites ({props.favoriteDogList.length})
+                    ❤️ View Favorites 
+                    {/* ({getFavoriteCount()}) */}
                 </button>
                 <button onClick={handleLogout} className="nav-button logout">
                     👋 Logout

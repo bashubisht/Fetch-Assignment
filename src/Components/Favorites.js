@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import DogTile from './DogTile';
 import './Favorites.css';
@@ -10,12 +10,20 @@ const Favorites = ({onFavoriteToggle}) => {
     const [matchedDog, setMatchedDog] = useState(null);
     const [showMatchModal, setShowMatchModal] = useState(false);
     const [isGeneratingMatch, setIsGeneratingMatch] = useState(false);
-    const [favoriteDogList, setFavoriteDogList] = useState(location.state?.favoriteDogList || []);
+    const [favoriteDogList, setFavoriteDogList] = useState(() => {
+        const savedFavorites = localStorage.getItem('favoriteDogs');
+        return savedFavorites ? JSON.parse(savedFavorites) : [];
+    });
 
- 
+    useEffect(() => {
+        localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogList));
+    }, [favoriteDogList]);
+
     const handleFavoriteToggle = (dog, isFavorite) => {
         if (!isFavorite) {
-            setFavoriteDogList(prev => prev.filter(d => d.id !== dog.id));
+            const updatedList = favoriteDogList.filter(d => d.id !== dog.id);
+            setFavoriteDogList(updatedList);
+            localStorage.setItem('favoriteDogs', JSON.stringify(updatedList));
         }
         if (onFavoriteToggle) onFavoriteToggle(dog, isFavorite);
     };
