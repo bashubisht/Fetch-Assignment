@@ -1,0 +1,289 @@
+/* Match Button */
+.match-button {
+    padding: 12px 24px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.match-button:hover:not(:disabled) {
+    background: #45a049;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.match-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.match-button.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.match-button.loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+/* Match Modal */
+.match-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.match-modal {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.match-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.match-header h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.match-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.matched-dog-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8f9fa;
+}
+
+.matched-dog-image {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.matched-dog-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.matched-dog-info {
+    padding: 20px;
+}
+
+.matched-dog-info h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.dog-details {
+    display: grid;
+    gap: 10px;
+}
+
+.dog-details p {
+    margin: 0;
+    color: #666;
+}
+
+.dog-details span {
+    font-weight: 600;
+    color: #333;
+}
+
+.match-modal-actions {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.close-modal-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal-button:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loading {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+/* Error Message */
+.error-message {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-message p {
+    color: #c33;
+    margin: 0;
+}
+
+.error-message button {
+    padding: 6px 12px;
+    background: none;
+    border: 1px solid #c33;
+    color: #c33;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message button:hover {
+    background: #c33;
+    color: white;
+}
+
+.dog-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.dog-card.selected {
+    box-shadow: 0 0 0 3px #4CAF50;
+}
+
+.selection-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dog-card.selected .selection-indicator {
+    opacity: 1;
+}
+
+.selection-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.selection-count {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.generate-match-button {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.generate-match-button:hover:not(:disabled) {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.generate-match-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.generate-match-button.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.generate-match-button.loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+} 
