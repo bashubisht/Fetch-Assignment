@@ -1,115 +1,112 @@
-# Fetch Dog Adoption App
+# Fetch Dog Adoption App 🐕
 
 This is a React-based frontend application designed to help users find shelter dogs for adoption. Users can search, filter, sort, favorite, and match with dogs using Fetch's provided backend API.
 
-Live Demo
+# 🌐 Live Demo
 
 Deployed Site: https://fetch-assignment-sandy.vercel.app/
 
-Repository
 
-GitHub Repository: [Your Repository URL]
+## Prerequisites
+1. Install [Node.js](https://nodejs.org/) (LTS version recommended).
+2. Install [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/).
 
-Features
+## Steps to Run
 
-User Authentication:
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/bashubisht/Fetch-Assignment.git
+   cd Fetch-Assignment
+   ```
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+3. **Run the Development Server:**
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+4. **Access the Application:**
+   
+   Once the server is running, open your browser and navigate to:
+     
+    ```bash
+    http://localhost:3000
+    ```
 
-Simple login screen where users enter their name and email.
+# 🚀 Features
 
-Authentication via Fetch's login endpoint.
+## User Authentication:
 
-Dog Search Page:
+- Simple login screen where users enter their name and email.
 
-Filter dogs by breed, age range, and ZIP code.
+- Authentication via Fetch's login endpoint.
 
-Results are paginated, showing 25 dogs per page.
+## Dog Search Page:
 
-Sort results by breed, name, or age.
+- Filter dogs by breed, age range, and ZIP code.
 
-Sorting can be toggled between ascending and descending order.
+- Results are paginated, showing 25 dogs per page.
 
-The default sorting order is alphabetically by breed in ascending order.
+- Sort results by breed, name, or age.
 
-Displays dog name, age, breed, location (ZIP code), and image.
+- Sorting can be toggled between ascending and descending order.
 
-Ability to reset all filters.
+- Displays dog name, age, breed, location (ZIP code), and image.
 
-Favorite & Match Dogs:
+- Ability to reset all filters.
 
-Users can favorite or unfavorite dogs from search results.
+## Favorite & Match Dogs:
 
-A separate favorites page lists all favorited dogs.
+- Users can favorite or unfavorite dogs from search results.
 
-Generate a match from favorite dogs using the /dogs/match endpoint.
+- A separate favorites page lists all favorited dogs.
 
-Matched dog is displayed in a modal with detailed information.
+- Generate a match from favorite dogs using the /dogs/match endpoint.
 
-Navigation:
+- Matched dog is displayed in a modal with detailed information.
 
-Navigation bar with links to Home (search page), Favorites page, and Logout.
+## Navigation:
 
-Logout functionality clears session and favorites.
+- Navigation bar with links to Home (search page), Favorites page, and Logout.
 
-Responsive Design:
+- Logout functionality clears session and favorites.
 
-Responsive UI ensuring usability across different device sizes.
+## Responsive Design:
 
-Technologies Used
+- Responsive UI ensuring usability across different device sizes.
+  
 
-React.js
+# 🔧 Technologies Used
 
-React Router for navigation
+- React.js
 
-Axios for HTTP requests
+- React Router for navigation
 
-CSS for styling
+- Axios for HTTP requests
 
-React Icons
+- CSS for styling
 
-Git for version control
+- React Icons
 
-Installation
+- Git for version control
 
-Prerequisites
+  
 
-Node.js (v14 or later recommended)
+# 💡 Usage
 
-npm (Node package manager)
+- Login with your name and email to access the application.
 
-Setup
+- Search dogs using filters for breed, age, and ZIP code.
 
-Clone the repository:
+- Sort results by breed, name, or age in ascending or descending order.
 
-git clone [Your Repository URL]
+- Favorite dogs by clicking the "Add to Favorites" button.
 
-Navigate to the project directory:
+- Visit the Favorites page to view favorited dogs.
 
-cd [Your Project Directory]
-
-Install dependencies:
-
-npm install
-
-Running the Application Locally
-
-Start the application:
-
-npm start
-
-The app will be accessible at:
-
-http://localhost:3000
-
-Usage
-
-Login with your name and email to access the application.
-
-Search dogs using filters for breed, age, and ZIP code.
-
-Sort results by breed, name, or age in ascending or descending order.
-
-Favorite dogs by clicking the "Add to Favorites" button.
-
-Visit the Favorites page to view favorited dogs.
-
-Click "Find My Match!" to generate a match from favorite dogs.
+- Click "Find My Match!" to generate a match from favorite dogs.
